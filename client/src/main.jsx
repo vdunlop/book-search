@@ -6,6 +6,7 @@ import App from './App.jsx'
 import SearchBooks from './pages/SearchBooks'
 import SavedBooks from './pages/SavedBooks'
 
+// using our router
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
   }
 ])
 
+// provide the router
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
 )

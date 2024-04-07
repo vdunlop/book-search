@@ -1,12 +1,11 @@
 const typeDefs = `#graphql
 
 type User {
-    _id: ID
+    _id: ID!
     username: String
     email: String
     bookCount: Int
-    password: String
-    savedBooks: [Book]!
+    savedBooks: [Book]
 }
 
 input BookInput {
@@ -18,9 +17,9 @@ input BookInput {
     link: String
 }
 type Book{
-    id: ID
+    id: ID!
     bookId: String
-    authors: [String]!
+    authors: [String]
     description: String
     title: String
     image: String
@@ -33,7 +32,7 @@ type Auth {
 }
 
 type Query {
-    getSingleUser(id: ID, username:String): User
+    getSingleUser(id: ID!): User
     getMe: User
     getUsers: [User]
 }

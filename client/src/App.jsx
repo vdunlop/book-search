@@ -1,11 +1,18 @@
+// App.jsx has components
 import './App.css';
+
+// To enable interaction with our Graphql API on the front end,
+// we utilize these tools to develop the client side behavior
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+
 import { setContext } from '@apollo/client/link/context';
+
+// used for single page app, html dropped into Outlet below
 import { Outlet } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
@@ -28,12 +35,15 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+// create a new apollo client
 const client = new ApolloClient({
   // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
+// wrap component tree with the ApolloProvider component to enable
+// access to the ApolloClient from anywhere within the app
 function App() {
   return (
     <ApolloProvider client={client}>
