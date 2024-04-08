@@ -10,7 +10,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      trim: true,
     },
     email: {
       type: String,
@@ -56,3 +55,4 @@ userSchema.virtual('bookCount').get(function () {
 const User = model('User', userSchema);
 
 module.exports = User;
+
