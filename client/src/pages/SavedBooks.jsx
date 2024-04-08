@@ -1,24 +1,35 @@
 // importing useState and useQuery hook
 //import { useState, useEffect } from 'react';
 import { useState } from "react";
+
+// use Apollo useMutation and use Query 
 import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
-// import the queries we want to use from queries.js utility
-import { GET_ME } from "../utils/queries";
+// import the queries and mutations we want to use from queries.js utility
+import { QUERY_ME } from "../utils/queries";
+import { REMOVE_BOOK } from "../utils/mutations";
 
-import { Container, Card, Button, Row, Col } from "react-bootstrap";
+import { 
+  Container, 
+  Card, 
+  Button, 
+  Row, 
+  Col 
+} from "react-bootstrap";
 
-// ??????????????????????????
-import { getMe, removeBook } from "../utils/API";
+// to authorize login
 import Auth from "../utils/auth";
 
+// used in local storage
 import { removeBookId } from "../utils/localStorage";
 
 // create the Saved Books page
 const SavedBooks = () => {
-  //  const [userData, setUserData] = useState({});
-  const { userData } = useQuery(GET_ME);
+//  const [userData, setUserData] = useState({});
+  const { userData } = useQuery(QUERY_ME);
   const userDataLength = Object.keys(userData).length;
+
   // use this to determine if `useEffect()` hook needs to run again
 
   /*useEffect(() => {
@@ -51,18 +62,24 @@ const SavedBooks = () => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
+      // not logged in
       return false;
     }
 
     try {
-      const response = await removeBook(bookId, token);
+      const [removeBook, {error}] = useMutation(REMOVE_BOOK);
 
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
+      const book = await removeBook(bookId);
 
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
+ //     if (!response.ok) {
+ //       throw new Error("something went wrong!");
+ //     }
+
+ //     const updatedUser = await user.json();
+ //     console.log("updateduser");
+ //     console.log(updatedUser);
+//      setUserData(updatedUser);
+
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {

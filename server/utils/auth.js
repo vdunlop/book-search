@@ -1,46 +1,43 @@
-const { GraphQLError } = require('graphql');
-const jwt = require('jsonwebtoken');
+const { GraphQLError } = require("graphql");
+const jwt = require("jsonwebtoken");
 
 // set token secret and expiration date
-const secret = 'mysecretsshhhhh';
-const expiration = '2h';
+const secret = "mysecretsshhhhh";
+const expiration = "2h";
 
 module.exports = {
-  AuthenticationError: new GraphQLError('Could not authenticate user.', {
+  AuthenticationError: new GraphQLError("Could not authenticate user.", {
     extensions: {
-      code: 'UNAUTHENTICATED',
+      code: "UNAUTHENTICATED",
     },
-  }),  
-  
+  }),
+
   // function for our authenticated routes
   authMiddleware: function ({ req }) {
     // allows token to be sent via  req.query or headers
-    let token = req.body.token|| req.query.token || req.headers.authorization;
+    let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
+    // Bearer Token: Authorization: Bearer dkdkdkdtoken...
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token.split(" ").pop().trim();
     }
 
+    if (!token) {
+      return req;
+    }
 
-    // different in 26 stu
-//    if (!token) {
- //     return res.status(400).json({ message: 'You have no token!' });
- //   }
- if (!token) {
-  return req;
-}
-    // verify token and get user data out of it
+    // verify token and get decoded user's data out of it
     try {
+      // verify token
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
-      console.log('Invalid token');
- //     return res.status(400).json({ message: 'Invalid token!' });
+      console.log("Invalid token");
     }
 
-    // send to next endpoint; this isn't in 26 stu
- //   next();
+    // return the request object so it can be passed to the resolver as context
+    return req;
+
   },
   signToken: function ({ email, username, _id }) {
     const payload = { email, username, _id };
