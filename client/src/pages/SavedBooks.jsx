@@ -79,7 +79,6 @@ const SavedBooks = () => {
  //     console.log("updateduser");
  //     console.log(updatedUser);
 //      setUserData(updatedUser);
-
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {

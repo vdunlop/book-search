@@ -37,7 +37,8 @@ query getUsers {
             link
         }
     }
-}`;
+}
+`;
 
 export const QUERY_ME = gql`
   query getMe {
