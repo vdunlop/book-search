@@ -48,6 +48,7 @@ const resolvers = {
 
       // find user
       const user =  await User.findOne({ email });
+ 
       if (!user) {
         throw AuthenticationError;
       }
