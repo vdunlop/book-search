@@ -1,7 +1,7 @@
 {
   "name": "book-search",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app provides users with an easy way to search for new books to read and keep a list of books for themselves to read or purchase in the future.",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -10,9 +10,20 @@
     "build": "cd client && npm run build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vicki Dunlop",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.0"
-  }
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdunlop/book-search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vdunlop/book-search/issues"
+  },
+  "homepage": "https://github.com/vdunlop/book-search#readme"
 }
