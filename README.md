@@ -94,15 +94,11 @@ Save Book
 ![Alt text](/client/public/save.png)
 
 ## Installation/Execution
-https://react-portfolio-vmd.netlify.app
+This project has not been deployed to Render. It runs in Develop mode:
 
-Open the react-portfolio by clicking on the above URL. It will open up to my About Me page which is a short bio of me.
+npm run install
 
-To see my current Resume, click on the Resume link in the navigation bar.
-
-To see my current projects, click on the Portfolio link in the navigation bar.
-
-To see contact me, click on the Contact link and fill out the form and click Submit.
+npm run develop
 
 ## Usage
 I am providing this app for potential employers to see what experience I have in Full Stack.
